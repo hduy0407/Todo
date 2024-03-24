@@ -17,7 +17,12 @@ const renderTask = (task) => {
 
 const getTasks = async () => {
     todos.getTasks().then((tasks) => {
-        tasks
+        tasks.forEach(task => {
+            renderTask(task)
+        });
+        input.disabled = false
+    }) .catch((error) => {
+        alert(error)
     })
 }
 
@@ -42,9 +47,10 @@ input.addEventListener('keypress', (event) => {
         event.preventDefault()
         const task = input.value.trim()
         if (task !== '') {
-            saveTask(task).then((json) => {
+            todos.addTask(task).then((task) => {
                 renderTask(task)
                 input.value = ''
+                input.focus()
             })
             
         }
