@@ -12,7 +12,7 @@ const renderTask = (task) => {
     const li = document.createElement('li')
     li.setAttribute('class','list-group-item')
     li.setAttribute('data-key',task.getId().toString())
-    li.innerHTML = task.getText()
+    //li.innerHTML = task.getText()
     renderSpan(li, task.getText())
     renderLink(li, task.getId())
     list.append(li)
@@ -26,7 +26,7 @@ const renderSpan = (li, text) => {
 const renderLink = (li, id) => {
     const a = li.appendChild(document.createElement('a'))
     a.innerHTML = '<i class="bi bi-trash"></i>'
-    a.setAttribute('style', 'float: right')
+    a.setAttribute('style', 'float: right; cursor: pointer;')
     a.addEventListener('click',(event) => {
         todos.removeTask(id).then((removed_id) => {
             const li_to_move = document.querySelector(`[data-key='${removed_id}']`)
