@@ -12,7 +12,7 @@ const openDb = () => {
     const pool = new Pool({
         user: 'postgres',
         host: 'localhost',
-        database: 'todo',
+        database: 'todos',
         password: 'haduy123',
         port: 5432
     })
@@ -31,9 +31,9 @@ app.get("/",(req,res) => {
 })
 
 app.post("/new",(req,res) => {
-    const pool = openDb
+    const pool = openDb()
 
-    pool.query('insert into task (task_description) values ($1) returning *',
+    pool.query('insert into task (description) values ($1) returning *',
     [req.body.description],
     (error,result) => {
         if(error) {
